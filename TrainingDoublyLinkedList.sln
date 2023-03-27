@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingDoublyLinkedList", "TrainingDoublyLinkedList\TrainingDoublyLinkedList.csproj", "{F1784EB2-8FB7-4CE9-92F1-2DCFADB1D316}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingDoublyLinkedList.Tests", "TrainingDoublyLinkedList.Tests\TrainingDoublyLinkedList.Tests.csproj", "{12E2EA71-9758-4F6F-8A9B-67D9714FE643}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1784EB2-8FB7-4CE9-92F1-2DCFADB1D316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1784EB2-8FB7-4CE9-92F1-2DCFADB1D316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1784EB2-8FB7-4CE9-92F1-2DCFADB1D316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1784EB2-8FB7-4CE9-92F1-2DCFADB1D316}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E2EA71-9758-4F6F-8A9B-67D9714FE643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E2EA71-9758-4F6F-8A9B-67D9714FE643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E2EA71-9758-4F6F-8A9B-67D9714FE643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E2EA71-9758-4F6F-8A9B-67D9714FE643}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CFE61CB-12DB-4BF5-AB6D-AA9B9C6DC5EC}
+	EndGlobalSection
+EndGlobal
