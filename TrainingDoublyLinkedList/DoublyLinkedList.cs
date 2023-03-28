@@ -1,6 +1,4 @@
-﻿using System.Reflection.PortableExecutable;
-
-namespace TrainingDoublyLinkedList
+﻿namespace TrainingDoublyLinkedList
 {
     public class DoublyLinkedList
     {
@@ -27,7 +25,6 @@ namespace TrainingDoublyLinkedList
                 {
                     throw new NullReferenceException();
                 }
-
             }
         }
 
@@ -100,7 +97,7 @@ namespace TrainingDoublyLinkedList
                 {
                     removeToElement = removeToElement.Next;
                 }
-                ChangeReferences(removeToElement.Prev, removeToElement.Next );
+                ChangeReferences(removeToElement.Prev, removeToElement.Next);
             }
             else
             { 
@@ -108,7 +105,7 @@ namespace TrainingDoublyLinkedList
             }
         }
 
-        public void ChangeReferences(Node previousElement, Node nextElement)
+        private void ChangeReferences(Node previousElement, Node nextElement)
         {
             if (previousElement == null)
             {

@@ -98,7 +98,7 @@ namespace TrainingDoublyLinkedList.Tests
 
             // Assert
             bool actual = Equals(SecondaryList);
-            Assert.AreEqual(expected, actual, "Removal all instances \"3\" element LinkedList and Doubly Linked List has different results");
+            Assert.AreEqual(expected, actual, "Removal all instances \"1\" element LinkedList and Doubly Linked List has different results");
         }
 
         [TestMethod]
@@ -140,12 +140,10 @@ namespace TrainingDoublyLinkedList.Tests
 
         private void FillList()
         {
-            int i = 0;
-            while (i < 99999)
+            for(int i = 0; i < 99999; i++)
             {
                 MainList.Add(i);
                 SecondaryList.AddLast(i);
-                i++;
             }
         }
         #endregion
