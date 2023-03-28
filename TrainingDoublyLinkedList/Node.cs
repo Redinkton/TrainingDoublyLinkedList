@@ -9,8 +9,6 @@
         public Node(int value)
         {
             Value = value;
-            //Next = null;
-            //Prev = null;
         }
     }
 }

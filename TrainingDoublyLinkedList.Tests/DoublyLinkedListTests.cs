@@ -19,7 +19,7 @@ namespace TrainingDoublyLinkedList.Tests
 
             // Assert
             bool actual = Equals(SecondaryList);
-            Assert.AreEqual(expected, actual, "Correctly");
+            Assert.AreEqual(expected, actual, "Addition to LinkedList and DoublyLinkedList has different results");
         }
 
         [TestMethod]
@@ -34,7 +34,7 @@ namespace TrainingDoublyLinkedList.Tests
 
             // Assert
             int actual = list[2];
-            Assert.AreEqual(expected, actual, "Correctly");
+            Assert.AreEqual(expected, actual, "Addition by index to LinkedList and Doubly Linked List has different results");
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace TrainingDoublyLinkedList.Tests
 
             // Assert
             bool actual = Equals(SecondaryList);
-            Assert.AreEqual(expected, actual, "Correctly");
+            Assert.AreEqual(expected, actual, "After removal first element LinkedList and Doubly Linked List has different results");
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace TrainingDoublyLinkedList.Tests
 
             // Assert
             bool actual = Equals(SecondaryList);
-            Assert.AreEqual(expected, actual, "Correctly");
+            Assert.AreEqual(expected, actual, "Removal last element LinkedList and Doubly Linked List has different results");
         }
 
         [TestMethod]
@@ -74,15 +74,31 @@ namespace TrainingDoublyLinkedList.Tests
         {
             // Arrange
             bool expected = true;
-            SecondaryList = new LinkedList<int>(new int []{ 1, 2, 4, 5, 2, 4 });
-            MainList = new DoublyLinkedList(new int[] { 1, 3, 3, 2, 4, 5, 3, 2, 4, 3});
+            MainList = new DoublyLinkedList(new int[] { 1, 3, 3, 2, 4, 5, 3, 2, 4, 3 });
+            SecondaryList = new LinkedList<int>(new int[] { 1, 2, 4, 5, 2, 4 });
 
             // Act
             MainList.RemoveAllThisInstances(3);
 
             // Assert
             bool actual = Equals(SecondaryList);
-            Assert.AreEqual(expected, actual, "Correctly");
+            Assert.AreEqual(expected, actual, "Removal all instances \"3\" element LinkedList and Doubly Linked List has different results");
+        }
+
+        [TestMethod]
+        public void RemoveAllElements_1()
+        {
+            // Arrange
+            bool expected = true;
+            MainList = new DoublyLinkedList(new int[] { 1, 1, 1, 1, 1, 4, 1, 4 });
+            SecondaryList = new LinkedList<int>(new int[] { 4, 4 });
+
+            // Act
+            MainList.RemoveAllThisInstances(1);
+
+            // Assert
+            bool actual = Equals(SecondaryList);
+            Assert.AreEqual(expected, actual, "Removal all instances \"3\" element LinkedList and Doubly Linked List has different results");
         }
 
         [TestMethod]
@@ -99,12 +115,15 @@ namespace TrainingDoublyLinkedList.Tests
 
             //Assert
             bool actual = Equals(SecondaryList);
-            Assert.AreEqual(expected, actual, "Correctly");
+            Assert.AreEqual(expected, actual, "Cleaning LinkedList and DoublyLinkedList has different results");
         }
 
         #region Helper
         private bool Equals(LinkedList<int> secondaryList)
         {
+            if(MainList.Count != secondaryList.Count)
+                return false;
+
             if (secondaryList != null)
             {
                 int i = 0;

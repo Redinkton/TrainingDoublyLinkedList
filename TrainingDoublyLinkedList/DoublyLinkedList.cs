@@ -1,4 +1,6 @@
-﻿namespace TrainingDoublyLinkedList
+﻿using System.Reflection.PortableExecutable;
+
+namespace TrainingDoublyLinkedList
 {
     public class DoublyLinkedList
     {
@@ -12,12 +14,20 @@
         {
             get
             {
-                Node temp = _first;
-                for(int j = 0;  j < i; j++)
+                if (_first != null & i < _count)
                 {
-                    temp = temp.Next;
+                    Node temp = _first;
+                    for (int j = 0; j < i; j++)
+                    {
+                        temp = temp.Next;
+                    }
+                    return temp.Value;
                 }
-                return temp.Value;
+                else
+                {
+                    throw new NullReferenceException();
+                }
+
             }
         }
 
@@ -56,15 +66,22 @@
 
         public void AddAtIndex(int index, int value)
         {
-            Node temp = _first;
-            temp = _first;
-            if(_first != null)
+            Node newElement = new Node(value);
+            Node previousElement = _first;
+            Node nextElement;
+            if (_first != null)
             {
-                for(int j = 0; j < index; j++)
+                for(int j = 0; j < index-1; j++)
                 {
-                    temp = temp.Next;
+                    previousElement = previousElement.Next;
                 }
-                temp.Value = value;                
+                // it looks ugly
+                nextElement = previousElement.Next;
+                nextElement = nextElement.Next;
+                nextElement.Prev = newElement;
+                previousElement.Next = newElement;
+                newElement.Prev = previousElement;
+                newElement.Next = nextElement;
             }
             else
             {
@@ -74,55 +91,51 @@
         
         public void RemoveAt(int index)
         {
-            Node previousElement = _first;
-            Node nextElement = _first;
+            Node removeToElement = _first;
 
-            if (index == 0)
+            if (_first != null & _last != null)
             {
-                _first = _first.Next;
-            }
-            else if (_first != null & _last != null)
-            {
-                //looking for the previous element
-                for (int i = 0; i < index - 1; i++)
+                // looking for the element to be removed
+                for (int i = 0; i < index ; i++)
                 {
-                    previousElement = previousElement.Next;
+                    removeToElement = removeToElement.Next;
                 }
-
-                //looking for the next element
-                for (int i = 0; i < index + 1; i++)
-                {
-                    nextElement = nextElement.Next;
-                }
-
-                if (nextElement != null)
-                {
-                    previousElement.Next = nextElement;
-                    nextElement.Prev = previousElement;
-                }
-                else
-                {
-                    previousElement.Next = null;
-                }
+                ChangeReferences(removeToElement.Prev, removeToElement.Next );
             }
             else
             { 
                 throw new NullReferenceException(); 
+            }
+        }
+
+        public void ChangeReferences(Node previousElement, Node nextElement)
+        {
+            if (previousElement == null)
+            {
+                _first = _first.Next;
+                _first.Prev = null;
+            }
+            else if (nextElement == null)
+            {
+                _last = _last.Prev;
+            }
+            else if (nextElement != null & previousElement != null)
+            {
+                previousElement.Next = nextElement;
+                nextElement.Prev = previousElement;
             }
             _count--;
         }
 
         public void RemoveAllThisInstances(int value)
         {
-            int a = _count;
+            int myCount = _count;
             Node node = _first;
-            int modifiedIndex = 0;
-            for (int i = 0; i < a; i++)
+            for (int i = 0; i < myCount; i++)
             {
                 if (node.Value == value)
                 {
-                    RemoveAt(i-modifiedIndex);
-                    modifiedIndex++;
+                    ChangeReferences(node.Prev, node.Next);
                 }
                 node = node.Next;
             }
