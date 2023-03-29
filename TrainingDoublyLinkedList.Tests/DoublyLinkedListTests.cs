@@ -1,3 +1,6 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
 namespace TrainingDoublyLinkedList.Tests
 {
     [TestClass]
@@ -26,19 +29,20 @@ namespace TrainingDoublyLinkedList.Tests
         public void AddAtIndex()
         {
             // Arrange
-            int expected = 100;
-            DoublyLinkedList list = new DoublyLinkedList(new int[] { 2, 244, 5, 86, 1});
+            bool expected = true;
+            MainList = new DoublyLinkedList(new int[] { 2, 244, 5, 86, 1 });
+            SecondaryList = new LinkedList<int>(new int[] { 2, 244, 100, 86, 1 });
 
             // Act
-            list.AddAtIndex(2, 100);
+            MainList.AddAtIndex(2, 100);
 
             // Assert
-            int actual = list[2];
+            bool actual = Equals(SecondaryList);
             Assert.AreEqual(expected, actual, "Addition by index to LinkedList and Doubly Linked List has different results");
         }
 
         [TestMethod]
-        public void RemoveFirstElement()
+        public void RemoveAt_FirstElement_MainEqualSecondary()
         {
             // Arrange
             bool expected = true;
@@ -54,7 +58,7 @@ namespace TrainingDoublyLinkedList.Tests
         }
 
         [TestMethod]
-        public void RemoveLastElement()
+        public void RemoveAt_LastElement_MainEqualSecondary()
         {
             // Arrange
             bool expected = true;
@@ -70,7 +74,7 @@ namespace TrainingDoublyLinkedList.Tests
         }
 
         [TestMethod]
-        public void RemoveAllElements_3()
+        public void RemoveAllElements_3RemoveFromMain_MainEqualSecondary()
         {
             // Arrange
             bool expected = true;
@@ -86,7 +90,7 @@ namespace TrainingDoublyLinkedList.Tests
         }
 
         [TestMethod]
-        public void RemoveAllElements_1()
+        public void RemoveAllThisInstances_1RemoveFromMain_MainEqualSecondary()
         {
             // Arrange
             bool expected = true;
@@ -102,7 +106,7 @@ namespace TrainingDoublyLinkedList.Tests
         }
 
         [TestMethod]
-        public void CLearAll()
+        public void CLearAll_MainSecondary_MainEqualSecondary()
         {
             // Arrange
             bool expected = true;
@@ -116,6 +120,89 @@ namespace TrainingDoublyLinkedList.Tests
             //Assert
             bool actual = Equals(SecondaryList);
             Assert.AreEqual(expected, actual, "Cleaning LinkedList and DoublyLinkedList has different results");
+        }
+
+        [TestMethod]
+        public void AddAtIndex_AddToAnyWrongIndex_NullReferenceExceptionReturned()
+        {
+            // Arrange
+            bool expected = true;
+            MainList = new DoublyLinkedList();
+
+            // Act
+            MainList.Add(811);
+            MainList.Add(77);
+            var ex = Assert.ThrowsException<NullReferenceException>(() => MainList.AddAtIndex(100, 100));
+
+            // Assert
+            Assert.AreEqual("Object reference not set to an instance of an object.", ex.Message);
+        }
+
+        [TestMethod]
+        public void RemoveAt_FromMiddle_MainEqualSecondary()
+        {
+            // Arrange
+            bool expected = true;
+            MainList = new DoublyLinkedList(new int[] { 1, 2, 3, 4, 5, 6 });
+            SecondaryList = new LinkedList<int>(new int[] { 1, 2, 4, 5, 6 });
+
+            // Act
+            MainList.RemoveAt(2);
+
+            // Assert
+            bool actual = Equals(SecondaryList);
+            Assert.AreEqual(expected, actual, "Removal the middle element LinkedList and Doubly Linked List has different results");
+        }
+
+        [TestMethod]
+        public void RemoveAt_ToAnyWrongIndex_MainEqualSecondary()
+        {
+            // Arrange
+            bool expected = true;
+            MainList = new DoublyLinkedList(new int[] { 1, 2, 3, 4, 5, 6 });
+
+            // Act
+            var ex = Assert.ThrowsException<NullReferenceException>(() => MainList.RemoveAt(99));
+
+            // Assert
+            Assert.AreEqual("Object reference not set to an instance of an object.", ex.Message);
+        }
+
+        [TestMethod]
+        public void AddAtIndex_AddToZeroIndex_NullReferenceExceptionReturned()
+        {
+            // Arrange
+            bool expected = true;
+            MainList = new DoublyLinkedList();
+            SecondaryList = new LinkedList<int>(new int[] { 100, 77 });
+
+            // Act
+            MainList.Add(811);
+            MainList.Add(77);
+            MainList.AddAtIndex(0, 100);
+
+            // Assert
+            bool actual = Equals(SecondaryList);
+            Assert.AreEqual(expected, actual, "Addition to the zero index LinkedList and DoublyLinkedList has different results");
+        }
+
+        [TestMethod]
+        public void AddAtIndex_AddToLastIndex_NullReferenceExceptionReturned()
+        {
+            // Arrange
+            bool expected = true;
+            MainList = new DoublyLinkedList();
+            SecondaryList = new LinkedList<int>(new int[] { 13, 77, 100 });
+
+            // Act
+            MainList.Add(13);
+            MainList.Add(77);
+            MainList.Add(199);
+            MainList.AddAtIndex(2, 100);
+
+            // Assert
+            bool actual = Equals(SecondaryList);
+            Assert.AreEqual(expected, actual, "Addition to the last index LinkedList and DoublyLinkedList has different results");
         }
 
         #region Helper

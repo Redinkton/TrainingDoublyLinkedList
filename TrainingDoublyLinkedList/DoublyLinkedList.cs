@@ -65,24 +65,45 @@
         {
             Node newElement = new Node(value);
             Node previousElement = _first;
-            Node nextElement;
-            if (_first != null)
+
+            if (index == 0)
             {
-                for(int j = 0; j < index-1; j++)
+                AddReferences(newElement, previousElement.Prev, previousElement.Next);
+            }
+            else if (index < _count)
+            {
+                for (int j = 0; j < index ; j++)
                 {
                     previousElement = previousElement.Next;
                 }
-                // it looks ugly
-                nextElement = previousElement.Next;
-                nextElement = nextElement.Next;
-                nextElement.Prev = newElement;
-                previousElement.Next = newElement;
-                newElement.Prev = previousElement;
-                newElement.Next = nextElement;
+                AddReferences(newElement, previousElement.Prev, previousElement.Next);
             }
             else
             {
                 throw new NullReferenceException();
+            }
+        }
+
+        private void AddReferences(Node newElement ,Node previousElement, Node nextElement)
+        {
+            if (previousElement == null)
+            {
+                newElement.Next = nextElement;
+                _first = newElement;
+            }
+            else if (nextElement == null)
+            {
+                _last = newElement;
+                newElement.Prev = previousElement;
+                previousElement.Next = newElement;
+                
+            }
+            else if (previousElement != null & nextElement != null)
+            {
+                newElement.Next = nextElement;
+                newElement.Prev = previousElement;
+                previousElement.Next = newElement;
+                nextElement.Prev = newElement;
             }
         }
         
@@ -97,7 +118,7 @@
                 {
                     removeToElement = removeToElement.Next;
                 }
-                ChangeReferences(removeToElement.Prev, removeToElement.Next);
+                RemoveReferences(removeToElement.Prev, removeToElement.Next);
             }
             else
             { 
@@ -105,7 +126,7 @@
             }
         }
 
-        private void ChangeReferences(Node previousElement, Node nextElement)
+        private void RemoveReferences(Node previousElement, Node nextElement)
         {
             if (previousElement == null)
             {
@@ -126,13 +147,13 @@
 
         public void RemoveAllThisInstances(int value)
         {
-            int myCount = _count;
             Node node = _first;
-            for (int i = 0; i < myCount; i++)
+
+            while (node != null)
             {
                 if (node.Value == value)
                 {
-                    ChangeReferences(node.Prev, node.Next);
+                    RemoveReferences(node.Prev, node.Next);
                 }
                 node = node.Next;
             }
