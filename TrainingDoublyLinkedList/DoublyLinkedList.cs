@@ -2,19 +2,19 @@
 {
     public class DoublyLinkedList
     {
-        private Node _first;
-        private Node _last;
+        public Node First { get; set; }
+        public Node Last { get; set; }
 
         private int _count;
         public int Count => _count;
 
-        public int this[int i]
+        private int this[int i]
         {
             get
             {
-                if (_first != null & i < _count)
+                if (First != null & i < _count)
                 {
-                    Node temp = _first;
+                    Node temp = First;
                     for (int j = 0; j < i; j++)
                     {
                         temp = temp.Next;
@@ -30,14 +30,14 @@
 
         public DoublyLinkedList()
         {
-            _first = null;
-            _last = null;
+            First = null;
+            Last = null;
             _count = 0;
         }
 
         public DoublyLinkedList(int[] i)
         {
-            Node temp = _first;
+            Node temp = First;
             for (int j = 0; j < i.Length; j++)
             {
                 Add(i[j]);
@@ -48,23 +48,23 @@
         {
             Node node = new Node(value);
 
-            if(_first == null)
+            if(First == null)
             {
-                _first = node;
+                First = node;
             }
             else
             {
-                _last.Next = node;
-                node.Prev = _last;
+                Last.Next = node;
+                node.Prev = Last;
             }
-            _last = node;
+            Last = node;
             _count++;
         }
 
         public void AddAtIndex(int index, int value)
         {
             Node newElement = new Node(value);
-            Node previousElement = _first;
+            Node previousElement = First;
 
             if (index == 0)
             {
@@ -89,11 +89,11 @@
             if (previousElement == null)
             {
                 newElement.Next = nextElement;
-                _first = newElement;
+                First = newElement;
             }
             else if (nextElement == null)
             {
-                _last = newElement;
+                Last = newElement;
                 newElement.Prev = previousElement;
                 previousElement.Next = newElement;
                 
@@ -109,9 +109,9 @@
         
         public void RemoveAt(int index)
         {
-            Node removeToElement = _first;
+            Node removeToElement = First;
 
-            if (_first != null & _last != null)
+            if (First != null & Last != null)
             {
                 // looking for the element to be removed
                 for (int i = 0; i < index ; i++)
@@ -130,12 +130,12 @@
         {
             if (previousElement == null)
             {
-                _first = _first.Next;
-                _first.Prev = null;
+                First = First.Next;
+                First.Prev = null;
             }
             else if (nextElement == null)
             {
-                _last = _last.Prev;
+                Last = Last.Prev;
             }
             else if (nextElement != null & previousElement != null)
             {
@@ -147,7 +147,7 @@
 
         public void RemoveAllThisInstances(int value)
         {
-            Node node = _first;
+            Node node = First;
 
             while (node != null)
             {
@@ -162,8 +162,8 @@
         public void Clear()
         {
             _count = 0;
-            _first = null;
-            _last = null;
+            First = null;
+            Last = null;
         }
     }
 }

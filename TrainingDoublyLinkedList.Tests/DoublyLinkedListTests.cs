@@ -99,7 +99,6 @@ namespace TrainingDoublyLinkedList.Tests
 
             // Act
             MainList.RemoveAllThisInstances(1);
-
             // Assert
             bool actual = Equals(SecondaryList);
             Assert.AreEqual(expected, actual, "Removal all instances \"1\" element LinkedList and Doubly Linked List has different results");
@@ -211,17 +210,33 @@ namespace TrainingDoublyLinkedList.Tests
             if(MainList.Count != secondaryList.Count)
                 return false;
 
+            int i = 0;
+            var main = MainList.First;
+            var second = secondaryList.First;
             if (secondaryList != null)
             {
-                int i = 0;
-                foreach (var item in secondaryList)
+                while (main != null)
                 {
-                    if (item != MainList[i])
+                    if (main.Value != second.Value)
                         return false;
-                    i++;
+                    main = main.Next;
+                    second = second.Next;
+                    ++i;
                 }
                 return true;
             }
+
+            //if (secondaryList != null)
+            //{
+            //    int i = 0;
+            //    foreach (var item in secondaryList)
+            //    {
+            //        if (item != MainList[i])
+            //            return false;
+            //        i++;
+            //    }
+            //    return true;
+            //}
             return false;
         }
 
