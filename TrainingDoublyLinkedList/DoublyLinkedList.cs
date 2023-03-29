@@ -111,7 +111,7 @@
         {
             Node removeToElement = First;
 
-            if (First != null & Last != null)
+            if (First != null && Last != null)
             {
                 // looking for the element to be removed
                 for (int i = 0; i < index ; i++)
@@ -135,6 +135,7 @@
             }
             else if (nextElement == null)
             {
+                previousElement.Next = null;
                 Last = Last.Prev;
             }
             else if (nextElement != null & previousElement != null)

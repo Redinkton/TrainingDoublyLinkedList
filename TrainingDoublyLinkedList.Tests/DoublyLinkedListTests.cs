@@ -225,18 +225,6 @@ namespace TrainingDoublyLinkedList.Tests
                 }
                 return true;
             }
-
-            //if (secondaryList != null)
-            //{
-            //    int i = 0;
-            //    foreach (var item in secondaryList)
-            //    {
-            //        if (item != MainList[i])
-            //            return false;
-            //        i++;
-            //    }
-            //    return true;
-            //}
             return false;
         }
 
